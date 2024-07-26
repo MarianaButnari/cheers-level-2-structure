@@ -1,0 +1,30 @@
+<fieldset>
+  <button (click)="goBack()">Back</button>
+  @if (cocktail$ | async; as cocktail) {
+    <div class="cocktail_card">
+      <div class="cocktail_img">
+        <img [src]="cocktail.imageUrl" [alt]="cocktail.name">
+      </div>
+      <div class="cocktail_content">
+        <span class="icon-star"
+              [id]="'star-' + cocktail.id"
+              (click)="toggleFavorite(cocktail.id)"
+              [ngClass]="{'active': isFavorite(cocktail.id)}">
+        </span>
+        <h2>{{ cocktail.name }}</h2>
+        <p [appBeverageStatus]="cocktail.isAlcoholic">{{ cocktail.isAlcoholic ? 'Alcoholic' : 'Non Alcoholic' }}</p>
+        <div>
+          <ul>
+            @for (ingredient of cocktail.ingredients; track ingredient) {
+              <li>{{ ingredient }}</li>
+            }
+          </ul>
+        </div>
+        <div>
+          {{ cocktail.instructions }}
+        </div>
+      </div>
+    </div>
+  }
+
+</fieldset>

@@ -1,0 +1,14 @@
+<fieldset>
+  <legend>Filters</legend>
+  <div class="input-with-label">
+    <label for="searchInput">Cocktail name</label>
+    <input id="searchInput" type="text" [formControl]="searchInput"/>
+  </div>
+</fieldset>
+<fieldset>
+  <div class="cocktail_list">
+    @for (cocktail of filtered; track cocktail.id) {
+      <app-cocktail-item [cocktail]="cocktail"></app-cocktail-item>
+    }
+  </div>
+</fieldset>
