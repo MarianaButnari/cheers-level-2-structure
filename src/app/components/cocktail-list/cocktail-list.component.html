@@ -6,7 +6,7 @@
   </div>
 </fieldset>
 <fieldset>
-  @if (filtered?.length) {
+  @if (filtered && filtered.length) {
     <div class="cocktail_list">
       @for (cocktail of filtered; track cocktail.id) {
         <app-cocktail-item [cocktail]="cocktail"></app-cocktail-item>
