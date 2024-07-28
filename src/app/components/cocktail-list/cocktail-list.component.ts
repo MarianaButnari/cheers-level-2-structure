@@ -1,6 +1,6 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {debounceTime, Observable} from 'rxjs';
+import {debounceTime} from 'rxjs';
 import {CocktailsService} from '../../shared/services/cocktails.service';
 import {Cocktail} from '../../shared/interfaces/cocktail';
 import {FormControl, ReactiveFormsModule} from '@angular/forms';
@@ -15,7 +15,7 @@ import {CocktailItemComponent} from '../cocktail-item/cocktail-item.component';
 })
 export class CocktailListComponent implements OnInit {
   private cocktailsService = inject(CocktailsService);
-  protected searchInput = new FormControl<string | null>('');
+  protected searchInput = new FormControl<string | null>(null);
   protected filtered: Cocktail[];
   private cocktails: Cocktail[];
 

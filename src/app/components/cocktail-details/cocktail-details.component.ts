@@ -1,10 +1,9 @@
 import {Component, inject, OnInit} from '@angular/core';
-import {ActivatedRoute, ParamMap, Router} from '@angular/router';
-import {map, Observable, of, switchMap} from 'rxjs';
-import {CocktailsService} from '../../shared/services/cocktails.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Observable, of, switchMap} from 'rxjs';
 import {Cocktail} from '../../shared/interfaces/cocktail';
 import {BeverageStatusDirective} from '../../shared/directives/beverage-status.directive';
-import {CommonModule, NgOptimizedImage} from '@angular/common';
+import {CommonModule} from '@angular/common';
 import {LocalStorageService} from '../../shared/services/local-storage.service';
 
 @Component({
@@ -13,7 +12,6 @@ import {LocalStorageService} from '../../shared/services/local-storage.service';
   imports: [
     CommonModule,
     BeverageStatusDirective,
-    NgOptimizedImage
   ],
   templateUrl: './cocktail-details.component.html',
   styleUrl: './cocktail-details.component.scss'

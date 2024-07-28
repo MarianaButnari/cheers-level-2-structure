@@ -6,9 +6,14 @@
   </div>
 </fieldset>
 <fieldset>
-  <div class="cocktail_list">
-    @for (cocktail of filtered; track cocktail.id) {
-      <app-cocktail-item [cocktail]="cocktail"></app-cocktail-item>
-    }
-  </div>
+  @if (filtered?.length) {
+    <div class="cocktail_list">
+      @for (cocktail of filtered; track cocktail.id) {
+        <app-cocktail-item [cocktail]="cocktail"></app-cocktail-item>
+      }
+    </div>
+  } @else {
+    <h2>I could not find any cocktail with this name.</h2>
+  }
+
 </fieldset>
