@@ -24,8 +24,23 @@
     flex-direction: column;
     padding: 5px;
 
-    .icon-star {
-      align-self: end;
+    .cocktail_title {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      .icon-star {
+        align-self: center;
+      }
+    }
+
+    table th {
+      background: transparent;
+    }
+
+    table td {
+      background: transparent;
+      border-top: none;
     }
   }
 
