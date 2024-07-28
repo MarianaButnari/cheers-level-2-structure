@@ -1,5 +1,5 @@
 import {Component, inject} from '@angular/core';
-import {Router} from '@angular/router';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-page-not-found',
@@ -9,9 +9,9 @@ import {Router} from '@angular/router';
   styleUrl: './page-not-found.component.scss'
 })
 export class PageNotFoundComponent {
-  private router = inject(Router);
+  private location = inject(Location);
 
   protected goBack() {
-    this.router.navigate(['']);
+    this.location.back();
   }
 }

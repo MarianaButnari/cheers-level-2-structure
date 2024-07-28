@@ -1,9 +1,9 @@
 import {Component, inject, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute} from '@angular/router';
 import {Observable, of, switchMap} from 'rxjs';
 import {Cocktail} from '../../shared/interfaces/cocktail';
 import {BeverageStatusDirective} from '../../shared/directives/beverage-status.directive';
-import {CommonModule} from '@angular/common';
+import {CommonModule, Location} from '@angular/common';
 import {LocalStorageService} from '../../shared/services/local-storage.service';
 
 @Component({
@@ -17,7 +17,7 @@ import {LocalStorageService} from '../../shared/services/local-storage.service';
   styleUrl: './cocktail-details.component.scss'
 })
 export class CocktailDetailsComponent implements OnInit {
-  private router = inject(Router);
+  private location = inject(Location);
   private activatedRoute = inject(ActivatedRoute);
   private localStorageService = inject(LocalStorageService);
   protected cocktail$: Observable<Cocktail>;
@@ -29,7 +29,7 @@ export class CocktailDetailsComponent implements OnInit {
   }
 
   protected goBack() {
-    this.router.navigate(['']);
+    this.location.back();
   }
 
   toggleFavorite(cocktailId: string) {
