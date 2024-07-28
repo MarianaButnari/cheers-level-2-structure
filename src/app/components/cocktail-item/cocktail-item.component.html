@@ -8,12 +8,6 @@
     </span>
     <h2 [routerLink]="['/cocktails', cocktail.id]">{{ cocktail.name }}</h2>
     <p [appBeverageStatus]="cocktail.isAlcoholic">{{ cocktail.isAlcoholic ? 'Alcoholic' : 'Non Alcoholic' }}</p>
-    <div>
-      <ul>
-        @for (ingredient of cocktail.ingredients; track ingredient) {
-          <li>{{ ingredient }}</li>
-        }
-      </ul>
-    </div>
+    <p> {{cocktail.ingredients | join: ' | '}}</p>
   </div>
 </div>
