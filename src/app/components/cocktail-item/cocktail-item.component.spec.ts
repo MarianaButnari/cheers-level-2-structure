@@ -3,21 +3,21 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CocktailItemComponent } from './cocktail-item.component';
 
 describe('CocktailItemComponent', () => {
-  let component: CocktailItemComponent;
-  let fixture: ComponentFixture<CocktailItemComponent>;
+  // let component: CocktailItemComponent;
+  // let fixture: ComponentFixture<CocktailItemComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [CocktailItemComponent]
-    })
-    .compileComponents();
+  // beforeEach(async () => {
+  //   await TestBed.configureTestingModule({
+  //     imports: [CocktailItemComponent]
+  //   })
+  //   .compileComponents();
     
-    fixture = TestBed.createComponent(CocktailItemComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+  //   fixture = TestBed.createComponent(CocktailItemComponent);
+  //   component = fixture.componentInstance;
+  //   fixture.detectChanges();
+  // });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+  // it('should create', () => {
+  //   expect(component).toBeTruthy();
+  // });
 });

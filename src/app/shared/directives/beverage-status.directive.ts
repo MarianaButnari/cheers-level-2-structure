@@ -7,7 +7,7 @@ import {Directive, ElementRef, inject, Input, OnChanges, Renderer2, SimpleChange
 export class BeverageStatusDirective implements OnChanges {
   private elementRef = inject(ElementRef);
   private renderer = inject(Renderer2);
-  @Input({required: true}) appBeverageStatus: boolean;
+  @Input({required: true}) appBeverageStatus: boolean | string;
 
   ngOnChanges(changes: SimpleChanges): void {
     const beverageStatusChanges = changes['appBeverageStatus'];
@@ -16,7 +16,7 @@ export class BeverageStatusDirective implements OnChanges {
     }
   }
 
-  private setBeverageStyles(beverageStatus: boolean) {
+  private setBeverageStyles(beverageStatus: boolean | string) {
     this.renderer.setStyle(this.elementRef.nativeElement, 'padding', '5px');
     this.renderer.setStyle(this.elementRef.nativeElement, 'textAlign', 'center');
     this.renderer.setStyle(this.elementRef.nativeElement, 'borderRadius', '5px');
