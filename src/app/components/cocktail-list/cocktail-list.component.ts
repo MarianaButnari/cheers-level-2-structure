@@ -1,16 +1,13 @@
 import {
-  AfterViewInit,
   ChangeDetectionStrategy,
-  ChangeDetectorRef,
   Component,
   DestroyRef,
   inject,
   OnInit,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { debounceTime } from 'rxjs';
+import { debounceTime, map, switchMap } from 'rxjs';
 import { CocktailsService } from '../../shared/services/cocktails.service';
-import { Cocktail } from '../../shared/interfaces/cocktail';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { CocktailItemComponent } from '../cocktail-item/cocktail-item.component';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -24,37 +21,36 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CocktailListComponent implements OnInit {
-  private changeDetectorRef = inject(ChangeDetectorRef);
   private cocktailsService = inject(CocktailsService);
   private destroyRef = inject(DestroyRef);
 
   protected title = `Cocktail name`;
   protected searchInput = new FormControl<string | null>(null);
-  protected filtered: Cocktail[];
-  private cocktails: Cocktail[];
+
+  private cocktails$ = this.cocktailsService.getAllCocktails();
+  protected filtered$ = this.cocktails$;
 
   ngOnInit(): void {
-    this.initData();
-    this.searchInput.valueChanges
-      .pipe(debounceTime(500), takeUntilDestroyed(this.destroyRef))
-      .subscribe((value: string | null) => {
-        value
-          ? (this.filtered = this.cocktails.filter((cocktail) =>
-              cocktail.name.toLowerCase().includes(value)
-            ))
-          : (this.filtered = this.cocktails);
-      });
+    this.filter();
   }
 
-  private initData() {
-    this.cocktailsService
-      .getAllCocktails()
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe((response: Cocktail[]) => {
-        this.cocktails = response;
-        this.filtered = this.cocktails;
-        this.changeDetectorRef.markForCheck();
-        // this.changeDetectorRef.detectChanges();
-      });
+  private filter() {
+    this.searchInput.valueChanges
+      .pipe(
+        // debounceTime(500),
+        takeUntilDestroyed(this.destroyRef),
+        switchMap((value: string | null) => {
+          return (this.filtered$ = this.cocktails$.pipe(
+            map((cocktails) =>
+              cocktails.filter((cocktail) =>
+                value
+                  ? cocktail.name.toLowerCase().includes(value.toLowerCase())
+                  : cocktail
+              )
+            )
+          ));
+        })
+      )
+      .subscribe();
   }
 }
