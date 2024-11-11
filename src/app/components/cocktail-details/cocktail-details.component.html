@@ -1,46 +1,43 @@
 <fieldset>
   <button (click)="goBack()">Back</button>
   @if (cocktail$ | async; as cocktail) {
-    <div class="cocktail_card">
-      <div class="cocktail_img">
-        <img [src]="cocktail.imageUrl" [alt]="cocktail.name">
-      </div>
-      <div class="cocktail_content">
-        <div class="cocktail_title">
-          <h2>{{ cocktail.name }}</h2>
-          <span class="icon-star"
-                [id]="'star-' + cocktail.id"
-                (click)="toggleFavorite(cocktail.id)"
-                [ngClass]="{'active': isFavorite(cocktail.id)}">
-        </span>
-        </div>
-        <table>
-          <tr>
-            <th>Type</th>
-            <td>
-              <p
-                [appBeverageStatus]="cocktail.isAlcoholic">{{ cocktail.isAlcoholic ? 'Alcoholic' : 'Non Alcoholic' }}</p>
-            </td>
-          </tr>
-          <tr>
-            <th>Ingredients</th>
-            <td>
-              <ul>
-                @for (ingredient of cocktail.ingredients; track ingredient) {
-                  <li>{{ ingredient }}</li>
-                }
-              </ul>
-            </td>
-          </tr>
-          <tr>
-            <th>Instructions</th>
-            <td>{{ cocktail.instructions }}</td>
-          </tr>
-        </table>
-      </div>
+  <div class="cocktail_card">
+    <div class="cocktail_img">
+      <img [ngSrc]="cocktail.imageUrl" [alt]="cocktail.name" priority>
     </div>
+    <div class="cocktail_content">
+      <div class="cocktail_title">
+        <h2>{{ cocktail.name }}</h2>
+        <span class="icon-star" [id]="'star-' + cocktail.id" (click)="toggleFavorite(cocktail.id)"
+          [ngClass]="{'active': isFavorite(cocktail.id)}">
+        </span>
+      </div>
+      <table>
+        <tr>
+          <th>Type</th>
+          <td>
+            <p [appBeverageStatus]="cocktail.isAlcoholic">{{ cocktail.isAlcoholic ? 'Alcoholic' : 'Non Alcoholic' }}</p>
+          </td>
+        </tr>
+        <tr>
+          <th>Ingredients</th>
+          <td>
+            <ul>
+              @for (ingredient of cocktail.ingredients; track ingredient) {
+              <li>{{ ingredient }}</li>
+              }
+            </ul>
+          </td>
+        </tr>
+        <tr>
+          <th>Instructions</th>
+          <td>{{ cocktail.instructions }}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
   } @else {
-    <h2>I could not find any cocktail with this ID.</h2>
+  <h2>I could not find any cocktail with this ID.</h2>
   }
 
 </fieldset>

@@ -33,7 +33,7 @@ export class CocktailItemComponent {
 
   isFavorite(cocktailId: string) {
     return this.localStorageService
-      .getFavouriteCocktails()
+      .getFavoriteCocktails()
       .includes(cocktailId);
   }
 }
